@@ -56,44 +56,49 @@ public class CrawlingTest {
 
             //System.out.println(jsonObject.getAsJsonArray("Items"));
 
+            StringBuffer buffer = new StringBuffer();
+
             for (int i = 0; i < movies.size() ; i++) {
 
                 JsonObject movie = movies.get(i).getAsJsonObject();
 
                 String movieTitle = movie.get("MovieNameKR").getAsString();
                 String posterURL = movie.get("PosterURL").getAsString();
-                System.out.println("------------------------");
+                //System.out.println("------------------------");
 
-                try (FileOutputStream fos = new FileOutputStream(savePath+ File.separator+movieTitle+".jpg");
-                     InputStream in = new URL(posterURL).openStream();){
-
+                buffer.append(movieTitle+"|"+posterURL+",");
 
 
-                    byte[] buffer = new byte[1024 * 8];
-
-                    while (true) {
-
-                        int count = in.read(buffer);
-
-                        if (count == -1) {
-                            break;
-                        }
-
-                        fos.write(buffer, 0, count);
-
-                    }
-
-                    fos.close();
-                    in.close();
-                }catch(Exception e){
-
-                }
+//                try (FileOutputStream fos = new FileOutputStream(savePath+ File.separator+movieTitle+".jpg");
+//                     InputStream in = new URL(posterURL).openStream();){
+//
+//
+//
+//                    byte[] buffer = new byte[1024 * 8];
+//
+//                    while (true) {
+//
+//                        int count = in.read(buffer);
+//
+//                        if (count == -1) {
+//                            break;
+//                        }
+//
+//                        fos.write(buffer, 0, count);
+//
+//                    }
+//
+//                    fos.close();
+//                    in.close();
+//                }catch(Exception e){
+//
+//                }
 
 
 
             }
 
-
+            System.out.println(buffer.toString());
 
 
         }catch(Exception ee) {
